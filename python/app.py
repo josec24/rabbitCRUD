@@ -11,22 +11,28 @@ collection=db['products']
 
 #Insertar un elemento en la base de datos
 def insertar(body):
-    lista=[]
-    print(body)
-
-    #Se convierte a Stringy se divide
-    lista=(body.decode("utf-8") ).split(sep='-')
-    collection.insert_one({"name":lista[0],"price":lista[1]})
-    print('Se ha insertado ',lista[0])
-    # for i in lista:
-    #     print('elemento: ',i)
-
-#Insertar un elemento en la base de datos
-def insertar2(body):
     print(type(body))
     print(body)
 
     #Se convierte a Stringy se divide
-    # lista=(body.decode("utf-8") ).split(sep='-')
     collection.insert(body)
     print('Se ha insertado ')
+
+def leer(body):
+    id=(body[0])['bookID']
+    print('ID buscado: ',id)
+    if collection.find_one({'bookID':id}) :
+        result=collection.find_one({'bookID':id})
+        print(result)
+        print('Se ha encontrado')
+    else:
+        print('No se ha encontrado')
+
+def eliminar(body):
+    id=(body[0])['bookID']
+    print('ID buscado: ',id)
+    if collection.find_one({'bookID':id}) :
+        collection.delete_one({'bookID':id})
+        print('Se ha eliminado')
+    else:
+        print('No se ha eliminado')
