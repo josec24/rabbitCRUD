@@ -12,6 +12,7 @@ package app;
  */
 public class Book {
 	private int bookID;
+        private String collection;
 	private String bookDescription;
 	private String author;
 	
@@ -20,6 +21,16 @@ public class Book {
 		bookID = value;
 	}
 	
+        public void setCollection(String value) 
+	{
+		collection = value;
+	}
+        
+        public String getCollection() 
+	{
+		return collection;
+	}
+        
 	public int getBookID()
 	{
 	  return bookID;	

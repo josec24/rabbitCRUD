@@ -13,7 +13,7 @@ collection=db['products']
 def insertar(body):
     print(type(body))
     print(body)
-
+    body[0].pop('collection')
     #Se convierte a Stringy se divide
     collection.insert(body)
     print('Se ha insertado ')
@@ -27,6 +27,22 @@ def leer(body):
         print('Se ha encontrado')
     else:
         print('No se ha encontrado')
+
+
+def actualizar(body):
+    # body={'bookID':1,'author':'joses','bookDescription':'ola k ase'}
+    id=(body[0])['bookID']
+    print(body[0])
+    body[0].pop('bookID')
+    body[0].pop('collection')
+    print(body[0])
+    print('ID buscado: ',id)
+    if collection.find_one({'bookID':id}) :
+        collection.update_one({'bookID':id},{"$set":body[0]})
+        print('Se ha actualizado')
+    else:
+        print('No se ha actualizado')
+
 
 def eliminar(body):
     id=(body[0])['bookID']

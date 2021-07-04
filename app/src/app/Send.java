@@ -18,6 +18,7 @@ import com.rabbitmq.client.ShutdownSignalException;
 import com.rabbitmq.tools.json.JSONWriter;
 
 
+
 public class Send {
         private final static String QUEUE_NAME = "hello";
 
@@ -43,12 +44,13 @@ public class Send {
 	boolean isExclusive = false;
 	boolean isAutoDelete = false;
 	// let's create the queue
-			channel.queueDeclare(QUEUE_NAME, isDurable, isExclusive, isAutoDelete, null);
-
+            channel.queueDeclare(QUEUE_NAME, isDurable, isExclusive, isAutoDelete, null);
+                   
 	List<Book> newBooks = new ArrayList<Book>();
-			// we fill the books with simple data.
+	// we fill the books with simple data.
 	for (int i = 1; i < 2; i++) {
             Book book = new Book();
+            book.setCollection("book");
             book.setBookID(i);
             book.setBookDescription("History VOL: " + i  );
             book.setAuthor("John Doe");
