@@ -14,6 +14,7 @@ public class Book {
 	private int bookID;
         private String collection;
         private int option;
+        private String name;
         private int nPages;
 	private String bookDescription;
 	private String author;
@@ -48,6 +49,16 @@ public class Book {
 		return option;
 	}
 	
+        public void setBookName(String value)
+	{
+		name = value;
+	}
+	
+	public String getBookName()
+	{
+		return name;
+	}
+        
 	public void setBookDescription(String value)
 	{
 		bookDescription = value;

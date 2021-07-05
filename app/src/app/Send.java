@@ -64,82 +64,82 @@ public class Send {
         Scanner sc2 = new Scanner(System.in);
         String jsonmessage="";
         
-        System.out.println("Ingrese:\n1.Operaciones para libros\n2.Operaciones para autores\n3.Salir");
+        System.out.println("Ingrese:\n1.Operaciones para libros\n2.Operaciones para autores");
         int opt=sc1.nextInt();
-        do{
-          System.out.println("Ingrese:\n1.Operaciones para libros\n2.Operaciones para autores\n3.Salir");
-          opt=sc1.nextInt();  
-            
-            if(opt==1){  
-                List<Book> newBooks = new ArrayList<Book>();
-                String description="";
-                String author="";
-                int nPages=1;
+        
+        if(opt==1){  
+            List<Book> newBooks = new ArrayList<Book>();
+            String name="";
+            String description="";
+            String author="";
+            int nPages=1;
 
-                // entrada de una cadena
-                System.out.println("Ingrese el id");
-                int id = sc1.nextInt();
-                System.out.println("Ingrese:\n1.Registrar un nuevo libro\n2.Buscar libro\n3.Actualizar un libro\n4.Eliminar un libro");
-                int option = sc1.nextInt();
-                if(option==1 ||option==3){
-                    System.out.println("Ingrese el author");
-                    author = sc2.nextLine();
-                    System.out.println("Ingrese la descripción");
-                    description = sc2.nextLine();
-                    System.out.println("Ingrese el número de páginas");
-                    nPages = sc1.nextInt();
-                }
-
-
-                //agregar 
-                Book book = new Book();
-                book.setBookID(id);
-                book.setCollection("books");
-                book.setOption(option);
-                book.setBookDescription(description);
-                book.setAuthor(author);
-                book.setNPages(nPages);
-                newBooks.add(book);
-
-                    //JSONWriter --> com.rabbitmq.tools.json.JSONWriter  
-                JSONWriter rabbitmqJson = new JSONWriter();
-                jsonmessage = rabbitmqJson.write(newBooks);
-            }else if(opt==2){
-                List<Author> newAuthors = new ArrayList<Author>();
-                String name="";
-                int authorPublic=0;
-                int nBooks=1;
-
-                // entrada de una cadena
-                System.out.println("Ingrese el id");
-                int id = sc1.nextInt();
-                System.out.println("Ingrese:\n1.Registrar un nuevo author\n2.Buscar author\n3.Actualizar un author\n4.Eliminar un author");
-                int option = sc1.nextInt();
-                if(option==1 ||option==3){
-                    System.out.println("Ingrese el nombre");
-                    name = sc2.nextLine();
-                    System.out.println("Ingrese el año de la primera publicación");
-                    authorPublic = sc1.nextInt();
-                    System.out.println("Ingrese el número de libros publicados");
-                    nBooks = sc1.nextInt();
-                }
-
-
-                //agregar
-                Author author = new Author();
-                author.setAuthorID(id);
-                author.setCollection("authors");
-                author.setOption(option);
-                author.setName(name);
-                author.setPublic(authorPublic);
-                author.setNBooks(nBooks);
-                newAuthors.add(author);
-
-                    //JSONWriter --> com.rabbitmq.tools.json.JSONWriter  
-                JSONWriter rabbitmqJson = new JSONWriter();
-                jsonmessage = rabbitmqJson.write(newAuthors);
+            // entrada de una cadena
+            System.out.println("Ingrese el id");
+            int id = sc1.nextInt();
+            System.out.println("Ingrese:\n1.Registrar un nuevo libro\n2.Buscar libro\n3.Actualizar un libro\n4.Eliminar un libro");
+            int option = sc1.nextInt();
+            if(option==1 ||option==3){
+                System.out.println("Ingrese el nombre del libro");
+                name = sc2.nextLine();
+                System.out.println("Ingrese el author");
+                author = sc2.nextLine();
+                System.out.println("Ingrese la descripción");
+                description = sc2.nextLine();
+                System.out.println("Ingrese el número de páginas");
+                nPages = sc1.nextInt();
             }
-        }while(opt!=3);
+
+
+            //agregar 
+            Book book = new Book();
+            book.setBookID(id);
+            book.setCollection("books");
+            book.setOption(option);
+            book.setBookName(name);
+            book.setBookDescription(description);
+            book.setAuthor(author);
+            book.setNPages(nPages);
+            newBooks.add(book);
+
+                //JSONWriter --> com.rabbitmq.tools.json.JSONWriter  
+            JSONWriter rabbitmqJson = new JSONWriter();
+            jsonmessage = rabbitmqJson.write(newBooks);
+        }else if(opt==2){
+            List<Author> newAuthors = new ArrayList<Author>();
+            String name="";
+            int authorPublic=0;
+            int nBooks=1;
+
+            // entrada de una cadena
+            System.out.println("Ingrese el id");
+            int id = sc1.nextInt();
+            System.out.println("Ingrese:\n1.Registrar un nuevo author\n2.Buscar author\n3.Actualizar un author\n4.Eliminar un author");
+            int option = sc1.nextInt();
+            if(option==1 ||option==3){
+                System.out.println("Ingrese el nombre");
+                name = sc2.nextLine();
+                System.out.println("Ingrese el año de la primera publicación");
+                authorPublic = sc1.nextInt();
+                System.out.println("Ingrese el número de libros publicados");
+                nBooks = sc1.nextInt();
+            }
+
+
+            //agregar
+            Author author = new Author();
+            author.setAuthorID(id);
+            author.setCollection("authors");
+            author.setOption(option);
+            author.setName(name);
+            author.setPublic(authorPublic);
+            author.setNBooks(nBooks);
+            newAuthors.add(author);
+
+                //JSONWriter --> com.rabbitmq.tools.json.JSONWriter  
+            JSONWriter rabbitmqJson = new JSONWriter();
+            jsonmessage = rabbitmqJson.write(newAuthors);
+        }
         
         
 	channel.basicPublish("", QUEUE_NAME, null, jsonmessage.getBytes());
