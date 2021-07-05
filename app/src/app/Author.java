@@ -5,27 +5,26 @@
  */
 package app;
 
-
 /**
  *
  * @author jose-
  */
-public class Book {
-	private int bookID;
+public class Author {
+        private int authorID;
         private String collection;
         private int option;
-        private int nPages;
-	private String bookDescription;
-	private String author;
-	
-	public void setBookID(int value) 
+        private String name;
+        private int authorPublic;
+	private int nBooks;
+        
+	public void setAuthorID(int value) 
 	{
-		bookID = value;
+		authorID = value;
 	}
         
-        public int getBookID()
+        public int getAuthorID()
 	{
-	  return bookID;	
+	  return authorID;	
 	}
 	
         public void setCollection(String value) 
@@ -48,39 +47,37 @@ public class Book {
 		return option;
 	}
 	
-	public void setBookDescription(String value)
+        public void setName(String value) 
 	{
-		bookDescription = value;
-	}
-	
-	public String getBookDescription()
-	{
-		return bookDescription;
-	}
-	
-	public void setAuthor(String value)
-	{
-		author = value;
-	}
-	
-	public String getAuthor()
-	{
-		return author ;
+		name = value;
 	}
         
-        public void setNPages(int value) 
+        public String getName() 
 	{
-		nPages = value;
+		return name;
 	}
         
-        public int getNPages() 
+	public void setPublic(int value)
 	{
-		return nPages;
+		authorPublic = value;
 	}
+	
+	public int getPublic()
+	{
+		return authorPublic;
+	}
+	
+	public void setNBooks(int value)
+	{
+		nBooks = value;
+	}
+	
+	public int getNBooks()
+	{
+		return nBooks ;
+	}
+       
 	
 	
 		
-	
-	
 }
-
