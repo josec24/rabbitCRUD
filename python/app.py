@@ -37,12 +37,10 @@ class App:
             3: self.UpdateAuthor,
             4: self.DeleteAuthor
             }
-            # self.insertar(body,collection)
             operaciones[opt](body,collection)
 
     #Crear una colección libros
     def CreateBook(self,body,collection):
-        #Se convierte a String y se divide
         collection.insert(body)
         print('Se ha insertado ')
 
@@ -80,7 +78,6 @@ class App:
 
     #Crear una colección author
     def CreateAuthor(self,body,collection):
-        #Se convierte a String y se divide
         collection.insert(body)
         print('Se ha insertado ')
 
